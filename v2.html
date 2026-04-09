@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Docker Internals</title>
+
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: monospace;
+            overflow: hidden;
+        }
+
+        /* Background base */
+        .reveal {
+            background: #000;
+            position: relative;
+        }
+
+        /* ORIGINAL (blue/purple) */
+        .reveal::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            z-index: 0;
+
+            background:
+                radial-gradient(circle at 20% 40%, rgba(0, 122, 255, 0.35), transparent 35%),
+                radial-gradient(circle at 80% 60%, rgba(175, 82, 222, 0.35), transparent 35%),
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
+
+            animation: moveGradient 8s ease-in-out infinite alternate;
+        }
+
+        /* NEW (red/blue overlay) */
+        .reveal::after {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            z-index: 0;
+
+            background:
+                radial-gradient(circle at 20% 40%, rgba(255, 59, 48, 0.35), transparent 35%),
+                radial-gradient(circle at 80% 60%, rgba(0, 122, 255, 0.35), transparent 35%),
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
+
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* activate transition */
+        .reveal.bg-shift::after {
+            opacity: 1;
+        }
+
+        /* keep layers non-interactive */
+        .reveal::before,
+        .reveal::after {
+            pointer-events: none;
+        }
+
+        @keyframes moveGradient {
+            0% { transform: translate(0%, 0%) scale(1); }
+            50% { transform: translate(8%, -8%) scale(1.08); }
+            100% { transform: translate(-8%, 8%) scale(1); }
+        }
+
+        .slides {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Box */
+        .glass-box {
+            width: 65%;
+            padding: 50px;
+            border-radius: 12px;
+            text-align: left;
+            background: rgba(15, 15, 20, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            animation: scaleIn 0.8s ease forwards;
+            margin-left: 20px;
+            position: relative;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Mac dots */
+        .window-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        /* Title */
+        .title-wrapper {
+            margin-left: 20px;
+        }
+
+        .title-main {
+            font-size: 10rem;
+            color: #ffffff;
+            letter-spacing: 8px;
+            font-family: VT323;
+            opacity: 0;
+            transform: translateX(-60px);
+            animation: slideIn 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .title-sub {
+            position: absolute;
+            bottom: -12px;
+            left: 60px;
+            font-size: 1.6rem;
+            color: #aaaaaa;
+            font-family: 'Saira Stencil One';
+            opacity: 0;
+            animation: slideInSub 0.8s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInSub {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(-55%); }
+        }
+
+        /* Questions */
+        .question {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            color: #00ffff;
+            margin-left: 20px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.6s ease;
+        }
+
+        .fragment.visible.question {
+            max-height: 100px;
+            opacity: 1;
+        }
+
+        /* slide right animation */
+        .slide-right {
+            transform: translateX(120px);
+        }
+
+        .fragment.visible.slide-right {
+            transform: translateX(0);
+        }
+
+        /* Slide 2 */
+        .theory-slide .title-main {
+            font-family: Arial;
+            font-size: 4rem;
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+
+        .theory-slide .question {
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        .slide-left-box {
+            transform: translateX(-120px);
+            opacity: 0;
+            transition: all 0.7s ease;
+        }
+
+        .reveal .slides section.present .slide-left-box {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Slide 1 -->
+<section>
+<div class="glass-box">
+
+<div class="window-bar">
+<div class="dot red"></div>
+<div class="dot yellow"></div>
+<div class="dot green"></div>
+</div>
+
+<div class="title-wrapper">
+<div class="title-main">DOCKER</div>
+<div class="title-sub">_INTERNALS</div>
+</div>
+
+<div class="question fragment slide-right">> What is Docker?</div>
+<div class="question fragment slide-right">> Why do we need Docker?</div>
+<div class="question fragment slide-right">> What actually happens under the hood?</div>
+
+</div>
+</section>
+
+<!-- Slide 2 -->
+<section class="theory-slide">
+<div class="glass-box slide-left-box">
+
+<div class="window-bar">
+<div class="dot red"></div>
+<div class="dot yellow"></div>
+<div class="dot green"></div>
+</div>
+
+<div class="title-main">Why Docker?</div>
+
+<div class="question fragment">• Eliminates "works on my machine"</div>
+<div class="question fragment">• Standardizes environment</div>
+<div class="question fragment">• Removes dependency conflicts</div>
+
+</div>
+</section>
+
+<!-- Slide 3 -->
+<section class="theory-slide color-shift-slide">
+<div class="glass-box">
+
+<div class="window-bar">
+<div class="dot red"></div>
+<div class="dot yellow"></div>
+<div class="dot green"></div>
+</div>
+
+<div class="title-main">What is Docker?</div>
+
+<div class="question fragment">• Containerization platform</div>
+<div class="question fragment">• Ensures consistency</div>
+<div class="question fragment">• Lightweight vs VMs</div>
+
+</div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script>
+Reveal.initialize();
+
+Reveal.on('slidechanged', event => {
+    const bg = document.querySelector('.reveal');
+
+    if (event.currentSlide.classList.contains('color-shift-slide')) {
+        bg.classList.add('bg-shift');
+    } else {
+        bg.classList.remove('bg-shift');
+    }
+});
+</script>
+
+</body>
+</html>
