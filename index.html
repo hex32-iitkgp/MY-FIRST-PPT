@@ -4,12 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Docker Internals</title>
-
-    <!-- Reveal.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
-
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
@@ -41,7 +37,6 @@
             animation: moveGradient 8s ease-in-out infinite alternate;
         }
 
-        /* NEW (red/blue overlay) */
         .reveal::after {
             content: "";
             position: absolute;
@@ -60,12 +55,10 @@
             transition: opacity 1s ease;
         }
 
-        /* activate transition */
         .reveal.bg-shift::after {
             opacity: 1;
         }
 
-        /* keep layers non-interactive */
         .reveal::before,
         .reveal::after {
             pointer-events: none;
@@ -98,13 +91,11 @@
             height: 100vh;
         }
 
-        /* Box */
         .glass-box {
             width: 65%;
             padding: 50px;
             border-radius: 12px;
             text-align: left;
-            /* was center */
             background: rgba(15, 15, 20, 0.92);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
@@ -112,7 +103,6 @@
             margin-left: 20px;
             position: relative;
             height: auto;
-            /* 👈 allow growth */
             min-height: unset;
         }
 
@@ -129,7 +119,6 @@
             }
         }
 
-        /* Mac dots */
         .window-bar {
             display: flex;
             gap: 8px;
@@ -155,13 +144,10 @@
             background: #27c93f;
         }
 
-        /* Title */
         .title-wrapper {
             position: relative;
             display: block;
-            /* was inline-block */
             margin-left: 20px;
-            /* slight padding from edge */
         }
 
         .title-main {
@@ -186,9 +172,7 @@
             margin-bottom: 25px;
             font-family: 'Saira Stencil One', monospace;
             display: block;
-            /* was inline-block */
             margin-left: 20px;
-            /* slight padding from edge */
             opacity: 0;
             animation: slideInSub 0.8s ease forwards;
             animation-delay: 0.8s;
@@ -213,20 +197,18 @@
             }
         }
 
-        /* 🔥 SMOOTH GROW TEXT */
         .question {
             margin-top: 20px;
             font-size: 1.4rem;
             color: #00ffff;
             margin-left: 20px;
-            /* slight padding from edge */
             max-height: 0;
             opacity: 0;
             overflow: hidden;
             transition: all 0.6s ease;
         }
 
-        /* when visible */
+
         .fragment.visible.question {
             max-height: 100px;
             opacity: 1;
@@ -257,7 +239,6 @@
             animation: drawArrow 1.5s ease forwards;
         }
 
-        /* Title (only for slide 2) */
         .theory-slide .title-main {
             font-family: Arial, sans-serif;
             font-size: 4rem;
@@ -282,7 +263,6 @@
             animation: none;
         }
 
-        /* Content text */
         .theory-slide .question {
             margin-top: 18px;
             font-size: 2rem;
@@ -312,11 +292,8 @@
 
         .side-image {
             width: 220px;
-            /* adjust as needed */
             height: auto;
             opacity: 0.95;
-
-            /* optional nice glow */
             filter: drop-shadow(0 0 20px rgba(0, 122, 255, 0.25));
         }
 
@@ -330,7 +307,6 @@
             transition: all 0.7s ease;
         }
 
-        /* when slide becomes active */
         .reveal .slides section.present .slide-left-box {
             transform: translateX(0);
             opacity: 1;
@@ -341,7 +317,6 @@
             transition: all 0.7s ease;
         }
 
-        /* when fragment becomes visible */
         .fragment.visible.slide-right {
             transform: translateX(0);
         }
@@ -414,10 +389,7 @@
         .divider {
             width: 2px;
             background: rgba(255, 255, 255, 0.2);
-
             align-self: stretch;
-            /* 👈 KEY */
-
             transform: scaleY(0);
             transform-origin: top;
             transition: transform 0.6s ease;
@@ -440,9 +412,7 @@
 
             background:
                 radial-gradient(circle at 20% 40%, rgba(175, 82, 222, 0.45), transparent 35%),
-                /* purple */
                 radial-gradient(circle at 80% 60%, rgba(85, 103, 206, 0.352), transparent 35%),
-                /* blue */
                 radial-gradient(circle at center, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
             animation: moveGradient 8s ease-in-out infinite alternate;
             opacity: 0;
@@ -464,15 +434,13 @@
             box-shadow: 0 0 8px rgba(0, 122, 255, 0.3);
 
             transition: transform 0.6s ease;
-        }
-
-        /* when slide is active */
+        }*/
         .reveal .slides section.present .divider {
             transform: scaleY(1);
             box-shadow: 0 0 12px rgba(0, 122, 255, 0.5);
         }
 
-        */ .arch-box {
+        .arch-box {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -507,9 +475,7 @@
 
             background:
                 radial-gradient(circle at 20% 40%, rgba(255, 204, 0, 0.45), transparent 35%),
-                /* yellow */
                 radial-gradient(circle at 80% 60%, rgba(28, 203, 226, 0.352), transparent 35%),
-                /* beige */
                 radial-gradient(circle at center, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 1));
             animation: moveGradient 8s ease-in-out infinite alternate;
             opacity: 0;
@@ -521,13 +487,11 @@
             opacity: 1;
         }
 
-        /* Full black override */
         .blackout-slide {
             background: #000 !important;
             transition: all 0.8s ease;
         }
 
-        /* kill gradient layers for this slide */
         .reveal.blackout::before,
         .reveal.blackout::after,
         .reveal.blackout .bg-layer-3,
@@ -535,7 +499,6 @@
             opacity: 0 !important;
         }
 
-        /* center text */
         .blackout-slide {
             display: flex !important;
             justify-content: center;
@@ -544,7 +507,6 @@
             text-align: center;
         }
 
-        /* big dramatic text */
         .impact-text {
             font-size: 3.25rem;
             color: #ffffff;
@@ -558,7 +520,6 @@
             position: relative;
         }
 
-        /* animate in */
         .reveal .slides section.present .impact-text {
             opacity: 1;
             transform: scale(1);
@@ -580,7 +541,6 @@
             align-items: stretch;
         }
 
-        /* Cards */
         .ns-card {
             padding: 20px;
             border-radius: 10px;
@@ -591,12 +551,9 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-
             transition: all 0.4s ease;
         }
 
-
-        /* Title */
         .card-title {
             font-size: 1.3rem;
             color: #00ffff;
@@ -604,8 +561,6 @@
             font-weight: bold;
         }
 
-        /* Description */
-        /* Description */
         .card-desc {
             font-size: 0.9rem;
             color: #bbbbbb;
@@ -613,7 +568,6 @@
             line-height: 1.4;
         }
 
-        /* Bullet list */
         .card-list {
             padding-left: 18px;
             margin: 0;
@@ -625,18 +579,15 @@
             margin-bottom: 4px;
         }
 
-        /* Hover glow (optional but nice) */
         .ns-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
         }
 
-        /* Blur background */
         .blur-bg {
             filter: blur(6px);
         }
 
-        /* Overlay */
         #popup-overlay {
             position: fixed;
             top: 0;
@@ -650,7 +601,6 @@
             z-index: 10;
         }
 
-        /* Popup container */
         #code-popup {
             position: fixed;
             top: 50%;
@@ -662,7 +612,6 @@
             pointer-events: none;
         }
 
-        /* Active state */
         #popup-overlay.active {
             opacity: 1;
             pointer-events: all;
@@ -674,7 +623,6 @@
             pointer-events: all;
         }
 
-        /* Popup window */
         .popup-window {
             width: 600px;
             background: #0d0d12;
@@ -683,7 +631,6 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
         }
 
-        /* Code styling */
         .code-block {
             margin-top: 15px;
             color: #00ffff;
@@ -694,7 +641,6 @@
             max-height: 60vh;
             overflow-y: auto;
             transition: all 0.4s ease;
-            /* keeps formatting */
         }
 
         .code-block code span {
@@ -751,7 +697,6 @@
             color: #bbbbbb;
         }
 
-        /* hover (optional) */
         .mini-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
@@ -768,14 +713,12 @@
             gap: 20px;
         }
 
-        /* points */
         .v-point {
             font-size: 1.4rem;
             color: #ffffff;
             padding-left: 10px;
         }
 
-        /* ending line */
         .end-note {
             margin-top: 20px;
             font-size: 1.2rem;
@@ -790,27 +733,20 @@
         .split-content {
             display: flex;
             align-items: stretch;
-            /* 👈 IMPORTANT (not flex-start) */
             gap: 30px;
             margin-top: 20px;
         }
 
-        /* panels */
         .left-panel,
         .right-panel {
             flex: 1;
         }
 
-
-        /* animate divider */
         .reveal .slides section.present .divider.fragment.visible {
             transform: scaleY(1);
         }
 
-        */
-
-        /* vertical text spacing */
-        .v-point {
+        */ .v-point {
             font-size: 1.3rem;
             margin-top: 10px;
         }
@@ -837,7 +773,6 @@
             margin-top: 40px;
         }
 
-        /* CENTER NODE */
         .dockerd-core {
             position: absolute;
             top: 50%;
@@ -855,7 +790,6 @@
             font-size: 1.5rem;
         }
 
-        /* CARDS */
         .dockerd-card {
             position: absolute;
             width: 180px;
@@ -870,7 +804,6 @@
             color: #ffffff;
         }
 
-        /* Positions */
         .top {
             top: 0;
             left: 50%;
@@ -900,13 +833,11 @@
             bottom: 40px;
         }
 
-        /* LINES */
         .line {
             position: absolute;
             background: rgba(0, 255, 255, 0.4);
         }
 
-        /* individual lines */
         .line-top {
             width: 2px;
             height: 80px;
@@ -922,21 +853,17 @@
             left: 50%;
         }
 
-        /* RIGHT LINE */
         .line-right {
             height: 2px;
             width: calc(20% - 40px);
-            /* 👈 dynamic length */
             top: 50%;
             left: 58%;
             transform: translateY(-50%);
         }
 
-        /* LEFT LINE */
         .line-left {
             height: 2px;
             width: calc(20% - 40px);
-            /* 👈 same logic */
             top: 50%;
             right: 58%;
             transform: translateY(-50%);
@@ -959,37 +886,30 @@
             transform: scale(1);
         }
 
-        /* TOP */
         .top {
             top: 15px;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* RIGHT */
         .right {
             top: 50%;
             left: 85%;
-            /* 👈 move relative to center */
             transform: translate(-50%, -50%);
         }
 
-        /* LEFT */
         .left {
             top: 50%;
             left: 15%;
-            /* 👈 move relative to center */
             transform: translate(-50%, -50%);
         }
 
-        /* BOTTOM */
         .bottom {
             bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* BOTTOM RIGHT */
         .bottom-right {
             top: 70%;
             left: 70%;
@@ -1004,12 +924,10 @@
             margin-top: 20px;
         }
 
-        /* LEFT */
         .ns-left {
             flex: 2;
         }
 
-        /* RIGHT */
         .ns-right {
             flex: 1;
             display: flex;
@@ -1018,7 +936,6 @@
             align-items: flex-end;
         }
 
-        /* CHIPS (right side boxes) */
         .ns-chip {
             padding: 12px 18px;
             border-radius: 8px;
@@ -1035,7 +952,6 @@
             transition: all 0.3s ease;
         }
 
-        /* hover glow (optional) */
         .ns-chip:hover {
             background: rgba(0, 255, 255, 0.08);
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
@@ -1063,27 +979,23 @@
             transition: all 0.3s ease;
         }
 
-        /* CODE (cyan) */
         .code-line {
             color: #e0871b;
             margin-top: 10px;
         }
 
-        /* OUTPUT (grey) */
         .output-line {
             color: #9aa0a6;
             margin-left: 20px;
             margin-bottom: 10px;
         }
 
-        /* Layout */
         .slide-content {
             display: flex;
             gap: 40px;
             align-items: flex-start;
         }
 
-        /* Mini terminal */
         .mini-terminal {
             width: 350px;
             background: rgba(15, 15, 20, 0.95);
@@ -1092,12 +1004,10 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
         }
 
-        /* Smaller top bar */
         .window-bar.small {
             margin-bottom: 10px;
         }
 
-        /* Code styling */
         .mini-code {
             font-family: monospace;
             font-size: 0.9rem;
@@ -1115,7 +1025,6 @@
             margin-bottom: 10px;
         }
 
-        /* Animation */
         .fragment .code,
         .fragment .comment {
             opacity: 0;
@@ -1129,14 +1038,12 @@
             transition: all 0.3s ease;
         }
 
-        /* Background gradient animation */
         .thankyou-slide {
             background: linear-gradient(-45deg, #ff00cc, #3333ff, #00ffff, #ffcc00);
             background-size: 400% 400%;
             animation: gradientMove 10s ease infinite;
         }
 
-        /* Center everything */
         .thankyou-container {
             height: 100vh;
             display: flex;
@@ -1151,7 +1058,6 @@
             src: url('myfont.ttf') format('truetype');
         }
 
-        /* BIG TEXT */
         .thankyou-text {
             font-size: 10rem;
             color: rgb(0, 0, 0);
@@ -1163,14 +1069,12 @@
                 0 0 60px rgba(255, 0, 255, 0.5);
         }
 
-        /* Subtitle */
         .thankyou-sub {
             margin-top: 10px;
             font-size: 1.8rem;
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Name */
         .thankyou-name {
             margin-top: 40px;
             font-size: 2rem;
@@ -1186,7 +1090,6 @@
             margin-top: 5px;
         }
 
-        /* Gradient animation */
         @keyframes gradientMove {
             0% {
                 background-position: 0% 50%;
@@ -1221,11 +1124,20 @@
             }
         }
     </style>
-
+    <script>
+        document.addEventListener("keydown", function (e) {
+            if (e.key.toLowerCase() === "f") {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    </script>
 </head>
 <div id="popup-overlay"></div>
 
-<!-- Popup -->
 <div id="code-popup">
     <div class="popup-window">
 
@@ -1258,7 +1170,6 @@
                         <div class="title-sub">&nbsp; &nbsp; _INTERNALS</div>
                     </div>
                     <img src="img (2).png" class="docker-logo" />
-                    <!-- 👇 smooth grow instead of pop -->
                     <div class="question fragment slide-right" data-fragment-index="0">
                         &nbsp&nbsp&gt; &nbsp;&nbsp;What is Docker?
                     </div>
@@ -1280,12 +1191,10 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">Why <span class="highlight-docker">Docker</span>?</div>
                         </div>
 
-                        <!-- Terminal-style content -->
                         <div class="question fragment" data-fragment-index="0">
                             • It eliminates the age old problem of "Trust me bro, it runs !!!"
                         </div>
@@ -1317,12 +1226,11 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
+
                         <div class="title-wrapper">
                             <div class="title-main">What is <span style="color:#ff5f56">Docker</span>?</div>
                         </div>
 
-                        <!-- Points -->
                         <div class="question fragment" data-fragment-index="0">
                             • Docker enables <span style="color: #ffbd2e;">containerization</span>, packaging
                             applications with all dependencies into a single unit
@@ -1355,15 +1263,11 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">VMs vs <span style="color: plum;">Containers</span></div>
                         </div>
 
-                        <!-- Split layout -->
                         <div class="compare-container">
-
-                            <!-- LEFT SIDE -->
                             <div class="compare-left">
                                 <div class="compare-title">&nbsp;&nbsp;&nbsp;&nbsp;Virtual Machines</div>
 
@@ -1379,11 +1283,7 @@
                                     • Hardware-level isolation
                                 </div>
                             </div>
-
-                            <!-- DIVIDER -->
                             <div class="divider"></div>
-
-                            <!-- RIGHT SIDE -->
                             <div class="compare-right">
                                 <div class="compare-title highlight-docker">&nbsp;&nbsp;&nbsp;Containers</div>
 
@@ -1401,8 +1301,6 @@
                             </div>
 
                         </div>
-
-                        <!-- Bottom highlight -->
                         <div class="summary fragment" data-fragment-index="3">
                             #&nbsp;Containers = Faster, lighter, more scalable$
                         </div>
@@ -1421,14 +1319,12 @@
                         <div class="dot green"></div>
                     </div>
 
-                    <!-- Title -->
                     <div class="title-wrapper">
                         <div class="title-main">What is a <span
                                 style="color: #FFE642; text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);">Container</span>?
                         </div>
                     </div>
 
-                    <!-- Definition -->
                     <div class="question fragment" data-fragment-index="0">
                         • A container is a <span class="highlight-docker">Linux process</span> with an isolated view
                         of
@@ -1448,8 +1344,6 @@
                         efficient
                     </div>
                 </div>
-
-                <!-- RIGHT SIDE: Architecture Flow -->
                 <div class="arch-box slide-right-box">
 
                     <div class="arch-item fragment" data-fragment-index="0">
@@ -1487,22 +1381,17 @@
                             <div class="dot yellow"></div>
                             <div class="dot green"></div>
                         </div>
-
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 Linux Primitives Behind <span class="highlight-docker"
                                     style="color: plum">Containers</span>
                             </div>
                         </div>
-
-                        <!-- Opening line -->
                         <div class="question fragment" data-fragment-index="0">
                             • Docker uses certain features that are already present in the <span
                                 class="highlight-docker">Linux Kernel</span>
                         </div>
 
-                        <!-- Core primitives -->
                         <div class="question fragment" data-fragment-index="1">
                             • <span class="highlight-docker">Namespaces</span> → isolate what processes can see
                         </div>
@@ -1528,8 +1417,6 @@
                         </div>
 
                     </div>
-
-                    <!-- RIGHT SIDE: Simple Architecture -->
                     <div class="arch-box slide-right-box">
 
                         <div class="arch-item fragment" data-fragment-index="0">
@@ -1563,7 +1450,6 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 Namespaces: <span class="highlight-docker">Isolation of What a Process Can See</span>
@@ -1584,7 +1470,6 @@
                             ↪ Same kernel, but <span class="highlight-docker">different resource views</span>
                         </div>
 
-                        <!-- Why it matters -->
                         <div class="question fragment" data-fragment-index="2" style="font-size: 1.5rem;">
                             • <span style="color: plum;">PID Namespace</span> → each container has its own process tree
                             (PID 1)
@@ -1610,7 +1495,6 @@
                             inter-process communication resources
                         </div>
                     </div>
-                    <!-- RIGHT SIDE: Namespace Types -->
                     <div class="arch-box slide-right-box">
                         <div class="arch-item fragment" data-fragment-index="2" style="margin-top: 10px;">PID → Process
                             ID isolation</div>
@@ -1637,14 +1521,12 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 Common <span class="highlight-docker" style="color: plum;">Linux Namespaces</span>
                             </div>
                         </div>
 
-                        <!-- Cards Grid -->
                         <div class="card-grid">
 
                             <div class="ns-card fragment" data-fragment-index="0">
@@ -1728,7 +1610,6 @@
             <section class="theory-slide color-shift-slide">
                 <div class="slide-content">
 
-                    <!-- LEFT SIDE -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -1736,15 +1617,12 @@
                             <div class="dot yellow"></div>
                             <div class="dot green"></div>
                         </div>
-
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 cgroups: <span class="highlight-docker" style="color: #ff5f56;">Resource Control</span>
                             </div>
                         </div>
 
-                        <!-- Definition -->
                         <div class="question fragment" data-fragment-index="0">
                             • Control Groups (<span class="highlight-docker" style="color: #ff5f56;">cgroups</span>)
                             limit and manage resource
@@ -1752,11 +1630,10 @@
                         </div>
 
                         <div class="question fragment" data-fragment-index="1">
-                            • Controls CPU, memory, disk I/O and network usage of processes(Click Each <span
+                            • Controls CPU, memory, disk I/O and some other resources of processes(Click Each <span
                                 class="highlight-docker" style="color: #ff5f56;">Card</span> to see the code)
                         </div>
 
-                        <!-- Key features -->
                         <div class="question fragment" data-fragment-index="2">
                             • <span class="highlight-docker" style="color: #ffbd2e;">Resource Limits</span> → set
                             maximum usage per container
@@ -1779,7 +1656,6 @@
 
                     </div>
 
-                    <!-- RIGHT SIDE: RESOURCE CARDS -->
                     <div class="card-container small-cards slide-right-box">
 
                         <div class="ns-card fragment slide-right" data-fragment-index="1" style="margin-top: 10px;">
@@ -1816,14 +1692,12 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 How Docker Uses <span class="highlight-docker">Namespaces & Cgroups</span>
                             </div>
                         </div>
 
-                        <!-- Concept -->
                         <div class="question fragment" data-fragment-index="0">
                             • Docker combines <span class="highlight-docker">namespaces</span> (isolation) and <span
                                 class="highlight-docker">cgroups</span> (resource control)
@@ -1837,7 +1711,6 @@
                             • This happens through a layered architecture inside Docker
                         </div>
 
-                        <!-- Flow hint -->
                         <div class="question fragment" data-fragment-index="3">
                             • Flow: <span class="highlight-docker fragment" data-fragment-index="4">CLI</span><span
                                 class="fragment" data-fragment-index="4"> → </span><span
@@ -1850,7 +1723,6 @@
                             </span><span class="highlight-docker fragment" data-fragment-index="7">Linux Kernel</span>
                         </div>
                     </div>
-                    <!-- 🔥 BOTTOM CARDS -->
                     <div class="bottom-cards">
 
                         <div class="mini-card fragment" data-fragment-index="4" style="margin-top: 10px;"
@@ -1891,7 +1763,6 @@
 
                     <div class="split-content">
 
-                        <!-- LEFT: CLI -->
                         <div class="left-panel">
 
                             <div class="title-main fragment" data-fragment-index="0">
@@ -1922,10 +1793,8 @@
 
                         </div>
 
-                        <!-- DIVIDER -->
                         <div class="divider fragment slide-right" data-fragment-index="5"></div>
 
-                        <!-- RIGHT: DAEMON -->
                         <div class="right-panel">
 
                             <div class="title-main fragment" data-fragment-index="5" style="font-size: 3.5rem;">
@@ -1969,19 +1838,15 @@
                         <div class="dot green"></div>
                     </div>
 
-                    <!-- Title -->
                     <div class="title-main">
                         What <span class="highlight-docker" style="color: plum;">dockerd</span> Does:
                     </div>
 
                     <div class="dockerd-layout">
 
-                        <!-- CENTER -->
                         <div class="dockerd-core fragment" data-fragment-index="0">
                             dockerd
                         </div>
-
-                        <!-- CARDS -->
 
                         <div class="dockerd-card top fragment" data-fragment-index="1">
                             Listens to CLI<br>via API
@@ -1999,15 +1864,10 @@
                             Handles Networking
                         </div>
 
-
-
-                        <!-- LINES -->
                         <div class="line line-top fragment" data-fragment-index="1"></div>
                         <div class="line line-right fragment" data-fragment-index="2"></div>
                         <div class="line line-bottom fragment" data-fragment-index="3"></div>
                         <div class="line line-left fragment" data-fragment-index="4"></div>
-
-
                     </div>
 
                 </div>
@@ -2028,7 +1888,6 @@
             <section id="containerd-slide" class="theory-slide color-shift-slide">
                 <div class="slide-content">
 
-                    <!-- LEFT SIDE -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -2037,7 +1896,6 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 <span style="font-size: 3.5rem;">containerd:<span class="highlight-docker"
@@ -2045,7 +1903,6 @@
                             </div>
                         </div>
 
-                        <!-- Definition -->
                         <div class="question fragment" data-fragment-index="0">
                             • Manages container lifecycle (start, stop, delete)
                         </div>
@@ -2054,7 +1911,6 @@
                             • Handles image management (pull, store, unpack)
                         </div>
 
-                        <!-- Key features -->
                         <div class="question fragment" data-fragment-index="2">
                             • Calls <span class="highlight-docker" style="color: #ffbd2e;">runc</span> to run containers
                         </div>
@@ -2065,7 +1921,6 @@
 
                     </div>
 
-                    <!-- RIGHT SIDE: RESOURCE CARDS -->
                     <div class="card-container small-cards slide-right-box">
 
                         <div class="ns-card fragment slide-right non-clickable" data-fragment-index="0"
@@ -2100,7 +1955,6 @@
             <section id="runc-slide" class="theory-slide purple-blue-slide">
                 <div class="slide-content">
 
-                    <!-- LEFT SIDE -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -2109,14 +1963,12 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 runc: <span class="highlight-docker">The Executor</span>
                             </div>
                         </div>
 
-                        <!-- Core Idea -->
                         <div class="question fragment" data-fragment-index="1" style="font-size: 1.5rem;">
                             ▷ runc is a <span class="highlight-docker">low-level runtime</span> designed to run
                             containers using Linux primitives
@@ -2126,7 +1978,6 @@
                             ↪ It is the component that <span class="highlight-docker">actually runs containers</span>
                         </div>
 
-                        <!-- Key Responsibilities -->
                         <div class="question fragment" data-fragment-index="2" style="font-size: 1.5rem;">
                             • Uses <span style="color: plum;">Namespaces</span> → isolates processes and resources
                         </div>
@@ -2136,7 +1987,7 @@
                         </div>
 
                         <div class="question fragment" data-fragment-index="4" style="font-size: 1.5rem;">
-                            • Creates container from <span style="color: plum;">OCI bundle</span> (config + rootfs)
+                            • Creates container from <span style="color: plum;">OCI bundle</span> = root filesystem + config.json
                         </div>
 
                         <div class="question fragment" data-fragment-index="5" style="font-size: 1.5rem;">
@@ -2149,7 +2000,6 @@
 
                     </div>
 
-                    <!-- RIGHT SIDE -->
                     <div class="arch-box slide-right-box">
 
                         <div class="arch-item fragment" data-fragment-index="2" style="margin-top: 10px;">
@@ -2189,30 +2039,25 @@
                     <div class=" bg-layer-beige"></div>
                     <div class="glass-box slide-up-box" style="width: 100%;">
 
-                        <!-- Mac bar -->
                         <div class="window-bar">
                             <div class="dot red"></div>
                             <div class="dot yellow"></div>
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- TERMINAL -->
                         <div class="terminal-block">
 
-                            <!-- STEP 1 -->
                             <div class="fragment" data-fragment-index="0">
                                 <div class="code-line">$ docker run -d --name web --cpus 0.5 --memory 256m --pids-limit
                                     100 nginx:alpine</div>
                                 <div class="output-line">a1b2c3d4e5f6...</div>
                             </div>
 
-                            <!-- STEP 2 -->
                             <div class="fragment" data-fragment-index="1">
                                 <div class="code-line">$ PID=$(docker inspect -f '{{.State.Pid}}' web)</div>
                                 <div class="output-line">97964</div>
                             </div>
 
-                            <!-- STEP 3 -->
                             <div class="fragment" data-fragment-index="2">
                                 <div class="code-line">$ ls -l /proc/$PID/ns</div>
                                 <div class="output-line">
@@ -2226,14 +2071,14 @@
                                 </div>
                             </div>
 
-                            <!-- STEP 4 -->
                             <div class="fragment" data-fragment-index="3">
                                 <div class="code-line">$ cat /proc/$PID/cgroup</div>
                                 <div class="output-line">
                                     12:freezer:/docker/a1b2c3d4e5f6<br>
                                     11:cpu:/docker/a1b2c3d4e5f6<br>
                                     9:memory:/docker/a1b2c3d4e5f6<br>
-                                    4:pids:/docker/a1b2c3d4e5f6
+                                    4:pids:/docker/a1b2c3d4e5f6<br><br>
+                                    [New V2]0::/user.slice/user-1000.slice/session-1.scope
                                 </div>
                             </div>
 
@@ -2246,7 +2091,6 @@
             <section class="theory-slide">
                 <div class="slide-content">
 
-                    <!-- MAIN WINDOW (LEFT) -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -2284,7 +2128,6 @@
                         </div>
                     </div>
                     <style>
-                        /* Layout for title bar */
                         .window-bar.with-title {
                             display: flex;
                             align-items: center;
@@ -2292,7 +2135,6 @@
                             position: relative;
                         }
 
-                        /* Keep dots on left */
                         .window-bar .dots {
                             position: absolute;
                             left: 10px;
@@ -2300,7 +2142,6 @@
                             gap: 6px;
                         }
 
-                        /* Title styling */
                         .window-title {
                             font-family: monospace;
                             font-size: 0.8rem;
@@ -2308,7 +2149,6 @@
                             letter-spacing: 1px;
                         }
                     </style>
-                    <!-- MINI TERMINAL (RIGHT) -->
                     <div class="mini-terminal slide-right-box">
 
                         <div class="window-bar small">
@@ -2350,7 +2190,6 @@
             <section class="theory-slide color-shift-slide">
                 <div class="slide-content">
                     <div class=" bg-layer-3"></div>
-                    <!-- LEFT SIDE -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -2359,7 +2198,6 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 Docker <span class="highlight-docker"
@@ -2368,7 +2206,6 @@
                             </div>
                         </div>
 
-                        <!-- Content -->
                         <div class="question fragment" data-fragment-index="0">
                             • Each container gets its own <span class="highlight-docker">network namespace</span>
                         </div>
@@ -2393,7 +2230,6 @@
 
                     </div>
 
-                    <!-- RIGHT SIDE MINI TERMINAL -->
                     <div class="mini-terminal slide-right-box">
 
                         <div class="window-bar small with-title">
@@ -2406,8 +2242,6 @@
                         </div>
 
                         <div class="mini-code">
-
-                            <!-- Commands -->
                             <div class="fragment" data-fragment-index="1">
                                 <div class="code" style="color: aquamarine;">docker network create mynet</div>
                             </div>
@@ -2416,7 +2250,6 @@
                                 <div class="code" style="color: aquamarine;">docker network ls</div>
                             </div>
 
-                            <!-- Output -->
                             <div class="fragment" data-fragment-index="3">
                                 <div class="comment"># Output >></div>
 
@@ -2450,14 +2283,12 @@
                         style="color: #ff5f56;">unsafe</span> right? </div>
             </section>
             <style>
-                /* Background gradient animation */
                 .thankyou-slide {
                     background: linear-gradient(-45deg, #ff00cc, #3333ff, #00ffff, #ffcc00);
                     background-size: 400% 400%;
                     animation: gradientMove 10s ease infinite;
                 }
 
-                /* Center everything */
                 .thankyou-container {
                     height: 100vh;
                     display: flex;
@@ -2467,10 +2298,8 @@
                     text-align: center;
                 }
 
-                /* BIG TEXT */
                 .thankyou-text {
                     font-size: 10rem;
-                    /* font-weight: 900; */
                     color: white;
                     letter-spacing: 8px;
                     transform: translateY(20px);
@@ -2480,14 +2309,12 @@
                         0 0 60px rgba(255, 0, 255, 0.5);
                 }
 
-                /* Subtitle */
                 .thankyou-sub {
                     margin-top: 10px;
                     font-size: 1.8rem;
                     color: rgba(255, 255, 255, 0.9);
                 }
 
-                /* Name */
                 .thankyou-name {
                     margin-top: 20px;
                     font-size: 2rem;
@@ -2497,7 +2324,6 @@
                     padding: 50px;
                     border-radius: 12px;
                     text-align: left;
-                    /* was center */
                     background: rgba(15, 15, 20, 0.5);
                     border: 1px solid rgba(255, 255, 255, 0.08);
                     box-shadow: 0 0 50px rgba(105, 165, 221, 0.9);
@@ -2505,7 +2331,6 @@
                     margin-left: 20px;
                     position: relative;
                     height: auto;
-                    /* 👈 allow growth */
                     min-height: unset;
                 }
 
@@ -2516,7 +2341,6 @@
                     margin-top: 5px;
                 }
 
-                /* Gradient animation */
                 @keyframes gradientMove {
                     0% {
                         background-position: 0% 50%;
@@ -2534,7 +2358,6 @@
             <section class="theory-slide purple-blue-slide">
                 <div class="slide-content">
 
-                    <!-- LEFT SIDE -->
                     <div class="glass-box slide-up-box">
 
                         <div class="window-bar">
@@ -2543,14 +2366,12 @@
                             <div class="dot green"></div>
                         </div>
 
-                        <!-- Title -->
                         <div class="title-wrapper">
                             <div class="title-main">
                                 Docker Security: <span class="highlight-docker">Isolation on Shared Kernel</span>
                             </div>
                         </div>
 
-                        <!-- Core Idea -->
                         <div class="question fragment" data-fragment-index="0">
                             • Containers share the same <span class="highlight-docker">Linux kernel</span>
                         </div>
@@ -2559,7 +2380,6 @@
                             ↪ But remain isolated using kernel features
                         </div>
 
-                        <!-- Mechanisms -->
                         <div class="question fragment" data-fragment-index="2">
                             • <span style="color: plum;">Namespaces</span> → isolate processes, network, filesystem
                         </div>
@@ -2582,7 +2402,6 @@
 
                     </div>
 
-                    <!-- RIGHT SIDE -->
                     <div class="arch-box slide-right-box">
 
                         <div class="arch-item fragment" data-fragment-index="2" style="margin-top: 20px;">
@@ -2605,7 +2424,6 @@
                             LSMs → Mandatory access control
                         </div>
 
-                        <!-- Final line -->
                         <div class="arch-item fragment" data-fragment-index="6" style="margin-top: 20px;">
                             → Strong isolation on shared kernel
                         </div>
@@ -2619,14 +2437,12 @@
 
                 <div class="thankyou-container">
 
-                    <!-- Big Thank You -->
                     <div class="thankyou-text">
                         THANK YOU
                     </div>
-                    <!-- Your Name -->
                     <div class="thankyou-name">
                         Anish Saha
-                        <span><a href="https://github.com/hex32-iitkgp/MY-FIRST-PPT/">25MF100001</a></span>
+                        <span><a href="https://github.com/hex32-iitkgp/MY-FIRST-PPT/">25MF10001</a></span>
                     </div>
 
                 </div>
@@ -2663,11 +2479,7 @@
                 const popup = document.getElementById("code-popup");
                 const codeBox = document.getElementById("popup-code");
                 const reveal = document.querySelector(".reveal");
-
-                /* Sample code per card */
                 const codeData = {
-
-                    /* ---------- NAMESPACES ---------- */
 
                     PID: [
                         "unshare --pid --fork bash",
@@ -2713,15 +2525,12 @@
                         "key        msqid"
                     ],
 
-                    /* ---------- CGROUPS ---------- */
-
                     CPU: [
                         "mkdir /sys/fs/cgroup/demo",
                         "echo 50000 > cpu.max",
                         "echo $$ > cgroup.procs",
                         "",
                         "<< O U T P U T >>",
-                        // "",
                         "CPU limited to 50% usage"
                     ],
 
@@ -2731,7 +2540,7 @@
                         "echo $$ > cgroup.procs",
                         "",
                         "<< O U T P U T >>",
-                        // "",
+
                         "Memory capped at 100MB"
                     ],
 
@@ -2754,7 +2563,6 @@
 
                 };
 
-                /* Click handler */
                 document.querySelectorAll(".ns-card").forEach(card => {
                     card.addEventListener("click", () => {
                         const title = card.querySelector(".card-title").innerText;
@@ -2769,7 +2577,6 @@
                     });
                 });
 
-                /* Close popup */
                 overlay.addEventListener("click", () => {
                     overlay.classList.remove("active");
                     popup.classList.remove("active");
@@ -2786,8 +2593,8 @@
                 });
                 document.addEventListener("keydown", (event) => {
                     if (event.key === "Escape") {
-                        event.preventDefault();     // stop default behavior
-                        event.stopPropagation();  // prevent event from bubbling up
+                        event.preventDefault();
+                        event.stopPropagation();
                         overlay.classList.remove("active");
                         popup.classList.remove("active");
                         reveal.classList.remove("blur-bg");
@@ -2796,9 +2603,7 @@
             </script>
             <script id="slide-nav">
                 function goToSlide(id, el) {
-                    // add animation class
                     el.classList.add("clicked");
-                    // wait for animation to finish
                     setTimeout(() => {
                         const slides = document.querySelectorAll('.reveal .slides section');
 
@@ -2807,9 +2612,8 @@
                                 Reveal.slide(index, 0, 0);
                             }
                         });
-                        // reset for future clicks
                         el.classList.remove("clicked");
-                    }, 400); // match CSS duration
+                    }, 400);
                 };
                 codeData["docker"] = [
                     "docker pull nginx",
@@ -2845,7 +2649,7 @@
                 document.querySelectorAll(".clickable-cmd").forEach(el => {
                     el.addEventListener("click", (e) => {
 
-                        e.stopPropagation(); // prevent slide navigation issues
+                        e.stopPropagation();
 
                         const key = el.dataset.cmd;
                         const codeLines = codeData[key] || ["// No data"];
