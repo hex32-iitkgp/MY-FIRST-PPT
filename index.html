@@ -1221,7 +1221,17 @@
             }
         }
     </style>
-
+    <script>
+    document.addEventListener("keydown", function (e) {
+      if (e.key.toLowerCase() === "f") {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      }
+    });
+    </script>
 </head>
 <div id="popup-overlay"></div>
 
@@ -2899,6 +2909,7 @@
                     });
                 });
             </script>
+            
 </body>
 
 </html>
