@@ -2530,6 +2530,37 @@
                         background-position: 0% 50%;
                     }
                 }
+
+                /* Remove default spacing */
+                html,
+                body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+                /* Make Reveal take full screen */
+                .reveal {
+                    margin: 0;
+                    padding: 0;
+                    height: 100vh;
+                }
+
+                /* Make slides fill completely */
+                .reveal .slides {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                /* Remove section spacing */
+                .reveal section {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    height: 100vh;
+                    width: 100vw;
+                    box-sizing: border-box;
+                }
             </style>
             <section class="theory-slide purple-blue-slide">
                 <div class="slide-content">
