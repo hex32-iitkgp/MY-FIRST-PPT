@@ -2658,7 +2658,7 @@
                             if (line.includes("OUTPUT")) {
                                 return `<span style="color:#ffaa00;">${line}</span>`;
                             }
-                            return `<span><b style="color:#666;margin-right:10px;">${i + 1}</b>${line}</span>`;
+                            return `<span>${line}</span>`;
                         }).join("");
 
                         overlay.classList.add("active");
